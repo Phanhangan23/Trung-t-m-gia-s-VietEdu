@@ -1,0 +1,111 @@
+/* ==========================================
+   KHU VỰC GIA SƯ – dùng chung biến màu của style.css
+   ========================================== */
+.gs-muted { color: var(--text-muted); font-size: 13px; }
+.gs-me { display: flex; gap: 12px; align-items: center; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 2px solid var(--border-color); }
+.gs-me strong { color: var(--primary-dark); }
+.gs-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.gs-avatar-empty { display: inline-flex; align-items: center; justify-content: center; background: #F8ECEE; color: var(--primary-red); font-size: 20px; }
+
+.gs-alert { padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; font-size: 14px; }
+.gs-alert-ok { background: #EAF7ED; color: #2E7D32; }
+.gs-alert-error { background: #FDECEA; color: #B3261E; }
+.gs-alert-info { background: #FFF8E7; color: #8a6100; }
+
+.gs-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.gs-b-ok { background: #EAF7ED; color: #2E7D32; }
+.gs-b-warn { background: #FFF8E7; color: #B78103; }
+.gs-b-info { background: #E8F1FD; color: #1565C0; }
+.gs-b-bad { background: #FDECEA; color: #C62828; }
+.gs-b-muted { background: #F1F3F5; color: #555; }
+
+.gs-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 6px; border: none; cursor: pointer;
+          font-size: 14px; font-weight: 600; background: var(--primary-red); color: #fff; text-decoration: none; }
+.gs-btn:hover { background: var(--primary-dark); }
+.gs-btn.gold { background: var(--accent-gold); color: var(--primary-dark); }
+.gs-btn.gold:hover { background: var(--accent-gold-hover); }
+.gs-btn.outline { background: #fff; color: var(--primary-red); border: 1px solid var(--primary-red); }
+.gs-btn.outline:hover { background: #F8ECEE; }
+.gs-btn.sm { padding: 5px 11px; font-size: 13px; }
+.gs-btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+.gs-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gs-field { display: flex; flex-direction: column; gap: 6px; }
+.gs-field.full { grid-column: 1 / -1; }
+.gs-field > label { font-size: 14px; font-weight: 600; }
+.gs-field .req { color: var(--primary-red); }
+.gs-field input[type=text], .gs-field input[type=email], .gs-field input[type=tel], .gs-field input[type=password],
+.gs-field input[type=date], .gs-field input[type=number], .gs-field input[type=file], .gs-field select, .gs-field textarea {
+    padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; font-family: inherit; background: #fff; width: 100%;
+}
+.gs-field input:focus, .gs-field select:focus, .gs-field textarea:focus { outline: none; border-color: var(--primary-red); }
+.gs-field textarea { min-height: 90px; resize: vertical; }
+.gs-err { color: #B3261E; font-size: 13px; }
+.gs-checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.gs-checks label { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid var(--border-color);
+                   border-radius: 20px; font-size: 13px; cursor: pointer; }
+.gs-checks input:checked + span { color: var(--primary-red); font-weight: 600; }
+.gs-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.gs-actions form { margin: 0; }
+
+.gs-card { border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; margin-bottom: 18px; background: #fff; }
+.gs-card h3 { font-size: 16px; color: var(--primary-dark); margin-bottom: 12px; }
+.gs-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 20px; font-size: 14px; }
+.gs-info span { display: block; font-size: 12px; color: var(--text-muted); }
+.gs-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.gs-stat { border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 14px; }
+.gs-stat b { display: block; font-size: 22px; color: var(--primary-dark); }
+.gs-stat span { font-size: 12px; color: var(--text-muted); }
+
+.gs-table-wrap { overflow-x: auto; }
+.gs-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.gs-table th, .gs-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+.gs-table th { background: #FBF4F5; color: var(--primary-dark); font-size: 13px; white-space: nowrap; }
+.gs-empty { text-align: center; color: var(--text-muted); padding: 30px 10px; }
+
+.gs-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.gs-tabs a { padding: 6px 14px; border-radius: 16px; border: 1px solid var(--border-color); font-size: 13px; }
+.gs-tabs a.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
+
+.gs-progress { height: 8px; background: #F1E6E8; border-radius: 4px; overflow: hidden; margin-top: 6px; }
+.gs-progress span { display: block; height: 100%; background: var(--accent-gold); }
+
+/* Lịch dạy */
+.gs-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.gs-cal-head { font-size: 12px; font-weight: 700; color: var(--text-muted); text-align: center; padding: 4px 0; }
+.gs-cal-day { border: 1px solid var(--border-color); border-radius: 6px; min-height: 96px; padding: 6px; font-size: 12px; background: #fff; }
+.gs-cal-day.out { background: #FAFAFA; color: #bbb; }
+.gs-cal-day.today { border: 2px solid var(--primary-red); }
+.gs-cal-day .d { font-weight: 700; margin-bottom: 4px; }
+.gs-session { display: block; background: #F8ECEE; color: var(--primary-dark); border-left: 3px solid var(--primary-red); border-radius: 4px;
+              padding: 3px 6px; margin-bottom: 4px; line-height: 1.35; }
+.gs-session.done { background: #EAF7ED; border-left-color: #2E7D32; color: #1b5e20; }
+.gs-week .gs-cal-day { min-height: 160px; }
+
+/* QR thanh toán */
+.gs-pay { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; }
+.gs-pay img { width: 220px; height: auto; border: 1px solid var(--border-color); border-radius: 8px; }
+.gs-countdown { font-size: 20px; font-weight: 700; color: var(--primary-red); font-variant-numeric: tabular-nums; }
+
+/* Đăng nhập */
+.gs-auth { max-width: 520px; margin: 30px auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px;
+           box-shadow: var(--shadow); padding: 28px; }
+.gs-auth .gs-tabs a { flex: 1; text-align: center; }
+
+@media (max-width: 700px) {
+    .gs-form { grid-template-columns: 1fr; }
+    .gs-pay { grid-template-columns: 1fr; }
+    .gs-cal { grid-template-columns: 1fr; }
+    .gs-cal-head, .gs-cal-day.out { display: none; }
+    .gs-cal-day { min-height: 0; }
+}
+
+/* ===== LIÊN HỆ PHỤ HUYNH (sau khi thanh toán thành công) ===== */
+.gs-contact { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border: 1px solid #CDE8D3; border-left: 4px solid #2E7D32;
+    border-radius: 8px; background: #F3FBF5; }
+.gs-contact-head { color: var(--primary-dark); }
+.gs-contact-phone { font-size: 22px; font-weight: 700; color: #1B5E20; letter-spacing: .5px; font-variant-numeric: tabular-nums; }
+.gs-contact-phone i { font-size: 16px; margin-right: 4px; }
+.gs-contact-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 4px; }
+.gs-paid-new { border: 2px solid #2E7D32; box-shadow: 0 4px 16px rgba(46, 125, 50, .15); }
+.gs-new-tag { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: #2E7D32; color: #fff; font-size: 11px; font-weight: 700; vertical-align: middle; }
