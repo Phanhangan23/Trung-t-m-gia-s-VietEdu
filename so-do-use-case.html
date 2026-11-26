@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Use Case VietEdu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: một cột đọc, biểu đồ UML rộng cuộn ngang riêng, bên dưới là bảng tác nhân và mã PlantUML */
+:root{
+  --bg:#f6f8fb; --surface:#ffffff; --fg:#1b2533; --muted:#5b6778; --line:#9aa6b6; --border:#d9e0ea;
+  --guest:#e8eef7; --guest-s:#7d93b5;
+  --parent:#e4f3ec; --parent-s:#3f9a70;
+  --tutor:#fdf0dc; --tutor-s:#c98a2b;
+  --shared:#eeeaf8; --shared-s:#7a68b8;
+  --admin:#fbe6e6; --admin-s:#b85a5a;
+  --accent:#2b5fa8;
+  --font:"Be Vietnam Pro",system-ui,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111722; --surface:#182131; --fg:#e4e9f1; --muted:#9aa6b8; --line:#6c7a8f; --border:#2b3647;
+  --guest:#1f2b3e; --guest-s:#7f9cc8; --parent:#173127; --parent-s:#5cc394;
+  --tutor:#352a17; --tutor-s:#e0a64a; --shared:#28233d; --shared-s:#a593e6;
+  --admin:#3a2122; --admin-s:#e08585; --accent:#7fa8e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111722; --surface:#182131; --fg:#e4e9f1; --muted:#9aa6b8; --line:#6c7a8f; --border:#2b3647;
+  --guest:#1f2b3e; --guest-s:#7f9cc8; --parent:#173127; --parent-s:#5cc394;
+  --tutor:#352a17; --tutor-s:#e0a64a; --shared:#28233d; --shared-s:#a593e6;
+  --admin:#3a2122; --admin-s:#e08585; --accent:#7fa8e6; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.6}
+.wrap{max-width:1240px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1{font-size:1.9rem;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:1.15rem;margin:0 0 12px;text-wrap:balance}
+.lead{color:var(--muted);max-width:68ch;margin:6px 0 0}
+.diagram{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:960px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:.85rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:12px;border-radius:50%;border:1.5px solid}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.actor{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;min-width:0}
+.actor h3{margin:0 0 4px;font-size:1rem}
+.actor p{margin:0 0 8px;color:var(--muted);font-size:.85rem}
+.actor ul{margin:0;padding-left:18px;font-size:.9rem}
+.actor code{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.code-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+button{font:inherit;font-size:.85rem;background:var(--accent);color:var(--surface);border:0;border-radius:6px;padding:7px 14px;cursor:pointer}
+button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+pre{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;overflow:auto;max-height:420px;font-family:var(--mono);font-size:.8rem;line-height:1.5;margin:0}
+.note{font-size:.85rem;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Biểu đồ Use Case tổng quát – Trung tâm gia sư VietEdu</h1>
+    <p class="lead">5 tác nhân: Khách, Phụ huynh, Gia sư, Nhân viên và Quản trị viên. Admin kế thừa toàn bộ chức năng của Nhân viên, thêm quản lý nhân viên và phân quyền.</p>
+  </header>
+
+  <div class="legend" aria-label="Chú thích màu">
+    <span><i style="background:var(--guest);border-color:var(--guest-s)"></i>Khách</span>
+    <span><i style="background:var(--parent);border-color:var(--parent-s)"></i>Phụ huynh</span>
+    <span><i style="background:var(--shared);border-color:var(--shared-s)"></i>Dùng chung PH &amp; GS</span>
+    <span><i style="background:var(--tutor);border-color:var(--tutor-s)"></i>Gia sư</span>
+    <span><i style="background:var(--admin);border-color:var(--admin-s)"></i>Nhân viên / Admin</span>
+  </div>
+
+  <div class="diagram"><svg id="uc" viewBox="0 0 1200 1160" role="img" aria-label="Biểu đồ use case tổng quát hệ thống VietEdu"></svg></div>
+
+  <section>
+    <h2>Chi tiết theo tác nhân</h2>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <section>
+    <div class="code-head">
+      <h2>Mã PlantUML</h2>
+      <button id="copy" type="button">Sao chép mã</button>
+    </div>
+    <p class="note">Dán vào plantuml.com, draw.io (Arrange › Insert › Advanced › PlantUML) hoặc StarUML để chỉnh sửa và chèn vào báo cáo.</p>
+    <pre id="puml"></pre>
+  </section>
+</div>
+
+<script>
+const groups = {
+  guest:  {fill:'--guest',  stroke:'--guest-s'},
+  parent: {fill:'--parent', stroke:'--parent-s'},
+  shared: {fill:'--shared', stroke:'--shared-s'},
+  tutor:  {fill:'--tutor',  stroke:'--tutor-s'},
+  admin:  {fill:'--admin',  stroke:'--admin-s'},
+};
+const left = [
+  ['guest','Xem trang chủ, giới thiệu'],
+  ['guest','Xem trang thông tin, bảo mật'],
+  ['guest','Đăng ký tài khoản (chọn vai trò)'],
+  ['parent','Đăng ký tìm gia sư'],
+  ['parent','Theo dõi yêu cầu của tôi'],
+  ['parent','Xem gia sư được gợi ý'],
+  ['parent','Xem lớp học của tôi'],
+  ['parent','Thanh toán học phí'],
+  ['shared','Đăng nhập / Đăng xuất'],
+  ['shared','Quên / đặt lại mật khẩu'],
+  ['shared','Cập nhật thông tin cá nhân'],
+  ['shared','Gửi yêu cầu hỗ trợ'],
+  ['tutor','Xác minh danh tính (KYC)'],
+  ['tutor','Ứng tuyển nhận lớp'],
+  ['tutor','Quản lý lớp đang dạy'],
+  ['tutor','Xem thanh toán, thu nhập'],
+  ['tutor','Nhận thông báo lớp mới'],
+];
+const right = [
+  'Đăng nhập quản trị','Xem dashboard thống kê','Quản lý phụ huynh','Quản lý gia sư',
+  'Duyệt hồ sơ KYC','Quản lý lớp học','Ghép gia sư với lớp','Quản lý thanh toán',
+  'Xử lý ticket hỗ trợ','Quản lý nhân viên','Phân quyền nhân viên'
+];
+const NS='http://www.w3.org/2000/svg', svg=document.getElementById('uc');
+const css=n=>`var(${n})`;
+function el(t,a,p=svg){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+
+// positions
+const LX=400, RX=810, RXR=140, LRX=165, RY=21;
+let y=80, prev=null; const L=left.map(([g,t])=>{ if(prev&&prev!==g) y+=22; prev=g; const o={g,t,y}; y+=52; return o;});
+const R=right.map((t,i)=>({t,y:100+i*92}));
+const H=Math.max(y,R[R.length-1].y)+50;
+svg.setAttribute('viewBox',`0 0 1200 ${H+20}`);
+
+// system boundary
+el('rect',{x:225,y:20,width:775,height:H-10,rx:8,fill:'none',stroke:css('--line'),'stroke-width':1.5});
+const st=el('text',{x:612,y:46,'text-anchor':'middle','font-weight':700,'font-size':16,fill:css('--fg')});st.textContent='Hệ thống quản lý trung tâm gia sư VietEdu';
+
+const avg=a=>a.reduce((s,o)=>s+o.y,0)/a.length;
+const actors={
+  guest:{x:95,y:avg(L.filter(o=>o.g==='guest')),name:'Khách'},
+  parent:{x:95,y:avg(L.filter(o=>o.g==='parent'||o.g==='shared')),name:'Phụ huynh'},
+  tutor:{x:95,y:avg(L.filter(o=>o.g==='tutor'||o.g==='shared')),name:'Gia sư'},
+  staff:{x:1105,y:avg(R.slice(0,9)),name:'Nhân viên'},
+  admin:{x:1105,y:avg(R.slice(9)),name:'Quản trị viên'},
+};
+const lines=el('g',{stroke:css('--line'),'stroke-width':1.2,fill:'none'});
+function link(a,x2,y2,side){const A=actors[a];el('line',{x1:A.x+(side>0?24:-24),y1:A.y,x2,y2},lines)}
+L.forEach(o=>{
+  const x=LX-LRX;
+  if(o.g==='guest') link('guest',x,o.y,1);
+  if(o.g==='parent'||o.g==='shared') link('parent',x,o.y,1);
+  if(o.g==='tutor'||o.g==='shared') link('tutor',x,o.y,1);
+});
+R.forEach((o,i)=>link(i<9?'staff':'admin',RX+RXR,o.y,-1));
+
+function ell(cx,cy,rx,g,t){
+  const s=groups[g];
+  el('ellipse',{cx,cy,rx,ry:RY,fill:css(s.fill),stroke:css(s.stroke),'stroke-width':1.5});
+  const tx=el('text',{x:cx,y:cy+5,'text-anchor':'middle','font-size':13.5,fill:css('--fg')});tx.textContent=t;
+}
+L.forEach(o=>ell(LX,o.y,LRX,o.g,o.t));
+R.forEach(o=>ell(RX,o.y,RXR,'admin',o.t));
+
+function actor(A){
+  const g=el('g',{stroke:css('--fg'),'stroke-width':1.8,fill:'none'});
+  const {x,y}=A;
+  el('circle',{cx:x,cy:y-30,r:10,fill:css('--surface')},g);
+  el('line',{x1:x,y1:y-20,x2:x,y2:y+8},g);
+  el('line',{x1:x-18,y1:y-10,x2:x+18,y2:y-10},g);
+  el('line',{x1:x,y1:y+8,x2:x-14,y2:y+30},g);
+  el('line',{x1:x,y1:y+8,x2:x+14,y2:y+30},g);
+  const t=el('text',{x,y:y+50,'text-anchor':'middle','font-weight':600,'font-size':14,fill:css('--fg')});t.textContent=A.name;
+}
+Object.values(actors).forEach(actor);
+
+// generalization Admin -> Nhân viên
+const s=actors.staff,a=actors.admin, top=s.y+60;
+el('line',{x1:a.x,y1:a.y-44,x2:a.x,y2:top+14,stroke:css('--fg'),'stroke-width':1.4});
+el('polygon',{points:`${a.x},${top} ${a.x-9},${top+15} ${a.x+9},${top+15}`,fill:css('--surface'),stroke:css('--fg'),'stroke-width':1.4});
+
+// cards
+const cards=[
+  ['Khách','Người chưa đăng nhập.',left.filter(x=>x[0]==='guest').map(x=>x[1]),'index.php, trang.php, chon-vai-tro.php, dang-ky-*.php'],
+  ['Phụ huynh','Đăng nhập để tìm và theo dõi gia sư cho con.',left.filter(x=>x[0]==='parent'||x[0]==='shared').map(x=>x[1]),'index.php + index_views/*'],
+  ['Gia sư','Nhận lớp, dạy và nhận thù lao.',left.filter(x=>x[0]==='tutor'||x[0]==='shared').map(x=>x[1]),'gia-su/*.php'],
+  ['Nhân viên','Vận hành trung tâm theo quyền được cấp.',right.slice(0,9),'admin.php + admin_views/*'],
+  ['Quản trị viên','Kế thừa mọi chức năng của Nhân viên.',['(tất cả chức năng Nhân viên)',...right.slice(9)],'staff-them/sua/xoa.php, phan-quyen.php'],
+];
+const box=document.getElementById('cards');
+cards.forEach(([h,p,items,files])=>{
+  const d=document.createElement('div');d.className='actor';
+  d.innerHTML=`<h3>${h}</h3><p>${p}</p><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul><p style="margin-top:8px"><code>${files}</code></p>`;
+  box.appendChild(d);
+});
+
+// PlantUML
+const id=t=>'UC_'+t.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/gi,'d').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'');
+let p=`@startuml VietEdu_UseCase\nleft to right direction\nskinparam packageStyle rectangle\nskinparam usecaseBorderThickness 1.2\n\nactor "Khách" as Khach\nactor "Phụ huynh" as PH\nactor "Gia sư" as GS\nactor "Nhân viên" as NV\nactor "Quản trị viên" as AD\nAD -|> NV\n\nrectangle "Hệ thống quản lý trung tâm gia sư VietEdu" {\n`;
+left.forEach(([g,t])=>p+=`  usecase "${t}" as ${id(t)}\n`);
+right.forEach(t=>p+=`  usecase "${t}" as ${id(t)}\n`);
+p+='}\n\n';
+left.forEach(([g,t])=>{
+  if(g==='guest') p+=`Khach --> ${id(t)}\n`;
+  if(g==='parent'||g==='shared') p+=`PH --> ${id(t)}\n`;
+  if(g==='tutor'||g==='shared') p+=`GS --> ${id(t)}\n`;
+});
+right.forEach((t,i)=>p+=`${i<9?'NV':'AD'} --> ${id(t)}\n`);
+p+='@enduml';
+document.getElementById('puml').textContent=p;
+document.getElementById('copy').addEventListener('click',e=>{
+  const b=e.currentTarget;
+  navigator.clipboard.writeText(p).then(()=>{b.textContent='Đã sao chép';setTimeout(()=>b.textContent='Sao chép mã',1800)})
+  .catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('puml'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Nhấn Ctrl+C';});
+});
+</script>
+
+</html>
